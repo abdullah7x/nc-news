@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react';
-import { Card } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { fetchArticles } from '../Utils/utils';
+import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const Topics = () => {
+  const { topic } = useParams();
   const [articles, setArticles] = useState([]);
   useEffect(() => {
-    fetchArticles().then((data) => {
-      setArticles(data);
+    fetchArticles(topic).then((articlesFromApi) => {
+      console.log(articlesFromApi);
+      setArticles(articlesFromApi);
     });
-  });
-
+  }, [topic]);
   return (
     <div className="article-cards">
       {articles.map((article) => {
@@ -20,10 +22,8 @@ const Home = () => {
               <Card.Body>
                 <Card.Title>{article.title}</Card.Title>
                 <Card.Text className="article-topic">
-                  <Link to={`/articles/${article.topic}`}>
-                    {article.topic[0].toUpperCase() +
-                      article.topic.slice(1).toLowerCase()}
-                  </Link>
+                  {article.topic[0].toUpperCase() +
+                    article.topic.slice(1).toLowerCase()}
                 </Card.Text>
                 <Card.Text className="article-author">
                   {article.author}
@@ -45,4 +45,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Topics;
