@@ -39,6 +39,7 @@ header {
   gap: 1em;
   padding: 0;
   margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 .article-card {
@@ -49,3 +50,32 @@ nav {
   max-width: calc(100vw - 2em);
 }
 
+p a {
+  color:#707070;
+  text-decoration: none;
+}
+
+p a:hover {
+  color: #212529;
+  text-decoration: underline;
+}
+
+.article-topic {
+  line-height: 0.8;
+  font-size: .9em;
+  color: #707070;
+}
+
+.article-link {
+  text-decoration: none;
+}
+
+.article-link:hover {
+  text-decoration: underline;
+}
+
+.article-author {
+  line-height: 0.8;
+  font-size: .9em;
+  color: #707070;
+}

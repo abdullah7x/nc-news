@@ -10,8 +10,10 @@ export const fetchTopics = () => {
   });
 };
 
-export const fetchArticles = () => {
+export const fetchArticles = (topic) => {
   return myApi.get('/articles').then(({ data }) => {
-    return data;
+    if (topic) {
+      return data.filter((article) => article.topic === topic);
+    } else return data;
   });
 };
