@@ -1,7 +1,14 @@
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import {
+  Navbar,
+  Container,
+  Nav,
+  NavDropdown,
+  Offcanvas,
+} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { fetchTopics } from '../Utils/utils';
 import { useState, useEffect } from 'react';
+import Media from 'react-media';
 
 const Navigation = () => {
   const [topics, setTopics] = useState([]);
@@ -13,47 +20,134 @@ const Navigation = () => {
   }, []);
 
   return (
-    <Navbar as="nav" bg="dark" variant="dark" fixed="top">
-      <Container>
-        <Navbar.Brand as={Link} to="/">
-          NC News
-        </Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link as={Link} to="/">
-            Home
-          </Nav.Link>
-          <NavDropdown title="Topics" id="basic-nav-dropdown">
-            {topics.map((topic) => {
-              return (
-                <NavDropdown.Item
-                  as={Link}
-                  to={`/articles/${topic.slug}`}
-                  key={topic.slug}
-                >
-                  {topic.slug[0].toUpperCase() +
-                    topic.slug.slice(1).toLowerCase()}
-                </NavDropdown.Item>
-              );
-            })}
-            {/* <NavDropdown.Item as={Link} to="/articles/coding">
-              Coding
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item> */}
-            {/* <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Separated link
-            </NavDropdown.Item> */}
-          </NavDropdown>
-          <Nav.Link as={Link} to="/">
-            Users
-          </Nav.Link>
-        </Nav>
-      </Container>
-    </Navbar>
+    <div>
+      <Media
+        queries={{
+          small: '(max-width: 768px)',
+          // medium: '(min-width: 600px) and (max-width: 1199px)',
+          large: '(min-width: 768px)',
+        }}
+      >
+        {(matches) => (
+          <>
+            {matches.small && (
+              <Navbar bg="dark" expand={false}>
+                <Container fluid>
+                  <Navbar.Brand as={Link} to="/">
+                    NC News
+                  </Navbar.Brand>
+                  <Navbar.Toggle aria-controls="offcanvasNavbar" />
+                  <Navbar.Offcanvas
+                    id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel"
+                    placement="end"
+                  >
+                    <Offcanvas.Header closeButton>
+                      <Offcanvas.Title id="offcanvasNavbarLabel">
+                        NC News
+                      </Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
+                      <Nav className="justify-content-end flex-grow-1 pe-3">
+                        <Nav.Link className="sidenav-link" as={Link} to="/">
+                          Home
+                        </Nav.Link>
+                        <NavDropdown
+                          title="Topics"
+                          id="offcanvasNavbarDropdown"
+                        >
+                          {topics.map((topic) => {
+                            return (
+                              <NavDropdown.Item
+                                as={Link}
+                                to={`/articles/${topic.slug}`}
+                                key={topic.slug}
+                              >
+                                {topic.slug[0].toUpperCase() +
+                                  topic.slug.slice(1).toLowerCase()}
+                              </NavDropdown.Item>
+                            );
+                          })}
+                        </NavDropdown>
+
+                        <Nav.Link as={Link} to="/">
+                          Users
+                        </Nav.Link>
+                      </Nav>
+                    </Offcanvas.Body>
+                  </Navbar.Offcanvas>
+                </Container>
+              </Navbar>
+            )}
+
+            {matches.large && (
+              <Navbar as="nav" bg="dark" variant="dark" fixed="top">
+                <Container>
+                  <Navbar.Brand as={Link} to="/">
+                    NC News
+                  </Navbar.Brand>
+                  <Nav className="me-auto">
+                    <Nav.Link as={Link} to="/">
+                      Home
+                    </Nav.Link>
+                    <NavDropdown title="Topics" id="basic-nav-dropdown">
+                      {topics.map((topic) => {
+                        return (
+                          <NavDropdown.Item
+                            as={Link}
+                            to={`/articles/${topic.slug}`}
+                            key={topic.slug}
+                          >
+                            {topic.slug[0].toUpperCase() +
+                              topic.slug.slice(1).toLowerCase()}
+                          </NavDropdown.Item>
+                        );
+                      })}
+                    </NavDropdown>
+                    <Nav.Link as={Link} to="/">
+                      Users
+                    </Nav.Link>
+                  </Nav>
+                </Container>
+              </Navbar>
+            )}
+          </>
+        )}
+      </Media>
+    </div>
   );
+
+  // return (
+  //   <Navbar as="nav" bg="dark" variant="dark" fixed="top">
+  //     <Container>
+  //       <Navbar.Brand as={Link} to="/">
+  //         NC News
+  //       </Navbar.Brand>
+  //       <Nav className="me-auto">
+  //         <Nav.Link as={Link} to="/">
+  //           Home
+  //         </Nav.Link>
+  //         <NavDropdown title="Topics" id="basic-nav-dropdown">
+  //           {topics.map((topic) => {
+  //             return (
+  //               <NavDropdown.Item
+  //                 as={Link}
+  //                 to={`/articles/${topic.slug}`}
+  //                 key={topic.slug}
+  //               >
+  //                 {topic.slug[0].toUpperCase() +
+  //                   topic.slug.slice(1).toLowerCase()}
+  //               </NavDropdown.Item>
+  //             );
+  //           })}
+  //         </NavDropdown>
+  //         <Nav.Link as={Link} to="/">
+  //           Users
+  //         </Nav.Link>
+  //       </Nav>
+  //     </Container>
+  //   </Navbar>
+  // );
 };
 
 export default Navigation;

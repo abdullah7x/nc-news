@@ -139,3 +139,7 @@ div a {
   color: var(--main-colour);
   text-decoration: solid;
 }
+
+nav div a {
+  color: white !important
+}

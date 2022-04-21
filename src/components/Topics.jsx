@@ -19,7 +19,11 @@ const Topics = () => {
           <div className="article-card" key={article.article_id}>
             <Card key={article.article_id}>
               <Card.Body>
-                <Card.Title>{article.title}</Card.Title>
+                <Card.Title>
+                  <Link to={`/article/${article.article_id}`}>
+                    {article.title}
+                  </Link>
+                </Card.Title>
                 <Card.Text className="article-topic">
                   {article.topic[0].toUpperCase() +
                     article.topic.slice(1).toLowerCase()}

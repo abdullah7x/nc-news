@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchArticle } from '../Utils/utils';
+import { Link } from 'react-router-dom';
 
 const Article = () => {
   const { article_id } = useParams();
@@ -20,7 +21,7 @@ const Article = () => {
     <div className="article">
       <h1 className="article-page-title">{article.title}</h1>
       <h6 className="article-page-topic">
-        <span>{articleTopic}</span>
+        <Link to={`/articles/${article.topic}`}>{articleTopic}</Link>
       </h6>
       <h6 className="article-page-author">{article.author}</h6>
       <h6 className="article-page-date">Created at: {article.created_at}</h6>
