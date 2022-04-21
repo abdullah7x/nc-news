@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchArticle, fetchComments } from '../Utils/utils';
 import { Link } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 
 const Article = () => {
   const { article_id } = useParams();
@@ -32,11 +33,21 @@ const Article = () => {
       <h6 className="article-page-date">Created at: {article.created_at}</h6>
       <hr />
       <p className="article-page-body">{article.body}</p>
-      <br />
-      <h2>Comments:</h2>
-      {comments.map((comment) => {
-        return <h1></h1>;
-      })}
+      <hr />
+      <section className="comments-section">
+        <h4>{comments.length} Comments</h4>
+        {comments.map((comment) => {
+          return (
+            <Card body className="comment-card">
+              <h6>
+                {comment.author}, {comment.created_at}
+              </h6>
+              <p>{comment.body}</p>
+              <text>Likes: {comment.votes}</text>
+            </Card>
+          );
+        })}
+      </section>
     </div>
   );
 };
