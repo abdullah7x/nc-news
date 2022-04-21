@@ -17,7 +17,7 @@ const Article = () => {
       );
       setVotes(article.votes);
     });
-  }, [article_id, article]);
+  }, [article_id]);
 
   return (
     <div className="article">
