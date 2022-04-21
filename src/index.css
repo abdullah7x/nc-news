@@ -136,10 +136,21 @@ footer p {
 }
 
 div a {
-  color: var(--main-colour);
+  color: var(--main-colour) !important;
   text-decoration: solid;
 }
 
 nav div a {
   color: white !important
+}
+
+.dropdown-item {
+  color: var(--main-colour) !important;
+}
+
+.vote-button {
+  display: block;
+  margin-bottom: 1em;
+  border-radius: .2em;
+  color:#212529
 }

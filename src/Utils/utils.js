@@ -23,3 +23,18 @@ export const fetchArticle = (article_id) => {
     return data;
   });
 };
+
+export const addVote = (article_id, votes, setVotes) => {
+  const currentVotes = votes;
+  setVotes((currVotes) => currVotes + 1);
+
+  myApi
+    .patch(`/articles/${article_id}`, {
+      inc_votes: 1,
+    })
+    .catch((err) => {
+      if (err) {
+        setVotes(currentVotes);
+      }
+    });
+};
