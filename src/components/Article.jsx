@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchArticle } from '../Utils/utils';
+import { fetchArticle, fetchComments } from '../Utils/utils';
 import { Link } from 'react-router-dom';
 
 const Article = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [articleTopic, setArticleTopic] = useState('');
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     fetchArticle(article_id).then(({ article }) => {
@@ -14,6 +15,10 @@ const Article = () => {
       setArticleTopic(
         article.topic[0].toUpperCase() + article.topic.slice(1).toLowerCase()
       );
+    });
+
+    fetchComments(article_id).then((data) => {
+      setComments(data);
     });
   }, [article_id, article]);
 
@@ -27,6 +32,11 @@ const Article = () => {
       <h6 className="article-page-date">Created at: {article.created_at}</h6>
       <hr />
       <p className="article-page-body">{article.body}</p>
+      <br />
+      <h2>Comments:</h2>
+      {comments.map((comment) => {
+        return <h1></h1>;
+      })}
     </div>
   );
 };
