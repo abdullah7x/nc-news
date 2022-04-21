@@ -36,6 +36,7 @@ export const addVote = (article_id, votes, setVotes, setDisabled) => {
     .catch((err) => {
       if (err) {
         setVotes(currentVotes);
+        setDisabled(false);
       }
     });
 };
