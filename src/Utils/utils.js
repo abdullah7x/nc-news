@@ -24,7 +24,7 @@ export const fetchArticle = (article_id) => {
   });
 };
 
-export const addVote = (article_id, votes, setVotes) => {
+export const addVote = (article_id, votes, setVotes, setDisabled) => {
   const currentVotes = votes;
   setVotes((currVotes) => currVotes + 1);
 
@@ -32,6 +32,7 @@ export const addVote = (article_id, votes, setVotes) => {
     .patch(`/articles/${article_id}`, {
       inc_votes: 1,
     })
+    .then(setDisabled(true))
     .catch((err) => {
       if (err) {
         setVotes(currentVotes);

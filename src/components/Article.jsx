@@ -8,6 +8,7 @@ const Article = () => {
   const [article, setArticle] = useState({});
   const [articleTopic, setArticleTopic] = useState('');
   const [votes, setVotes] = useState(0);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     fetchArticle(article_id).then(({ article }) => {
@@ -28,8 +29,9 @@ const Article = () => {
       <h6 className="article-page-author">{article.author}</h6>
       <h6 className="article-page-date">Created at: {article.created_at}</h6>
       <button
+        disabled={disabled}
         onClick={() => {
-          addVote(article_id, votes, setVotes);
+          addVote(article_id, votes, setVotes, setDisabled);
         }}
         className="vote-button"
       >

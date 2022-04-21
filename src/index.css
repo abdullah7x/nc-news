@@ -157,5 +157,11 @@ nav div a {
   display: block;
   margin-bottom: 1em;
   border-radius: .2em;
-  color:#212529
+  color:#212529;
+  background-color: white;
+}
+
+button:disabled {
+  background-color: var(--main-colour);
+  color: white;
 }
