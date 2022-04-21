@@ -9,7 +9,6 @@ const Topics = () => {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     fetchArticles(topic).then((articlesFromApi) => {
-      console.log(articlesFromApi);
       setArticles(articlesFromApi);
     });
   }, [topic]);
@@ -31,7 +30,7 @@ const Topics = () => {
                 <Card.Text>{article.body.slice(0, 150)}...</Card.Text>
                 <Card.Link
                   as={Link}
-                  to={`/articles/${article.article_id}`}
+                  to={`/article/${article.article_id}`}
                   className="article-link"
                 >
                   Read article

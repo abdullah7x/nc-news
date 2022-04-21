@@ -18,7 +18,11 @@ const Home = () => {
           <div className="article-card" key={article.article_id}>
             <Card key={article.article_id}>
               <Card.Body>
-                <Card.Title>{article.title}</Card.Title>
+                <Card.Title>
+                  <Link to={`/article/${article.article_id}`}>
+                    {article.title}
+                  </Link>
+                </Card.Title>
                 <Card.Text className="article-topic">
                   <Link to={`/articles/${article.topic}`}>
                     {article.topic[0].toUpperCase() +
@@ -31,7 +35,7 @@ const Home = () => {
                 <Card.Text>{article.body.slice(0, 150)}...</Card.Text>
                 <Card.Link
                   as={Link}
-                  to={`/articles/${article.article_id}`}
+                  to={`/article/${article.article_id}`}
                   className="article-link"
                 >
                   Read article

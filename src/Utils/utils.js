@@ -17,3 +17,9 @@ export const fetchArticles = (topic) => {
     } else return data;
   });
 };
+
+export const fetchArticle = (article_id) => {
+  return myApi.get(`/articles/${article_id}`).then(({ data }) => {
+    return data;
+  });
+};

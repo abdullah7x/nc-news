@@ -2,6 +2,8 @@ import Navigation from './components/Navigation.jsx';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home.jsx';
 import Topics from './components/Topics.jsx';
+import Article from './components/Article.jsx';
+import Footer from './components/Footer.jsx';
 
 function App() {
   return (
@@ -11,8 +13,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/articles/:topic" element={<Topics />}></Route>
+          <Route path="/article/:article_id" element={<Article />}></Route>
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 }

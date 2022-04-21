@@ -13,7 +13,7 @@ const Navigation = () => {
   }, []);
 
   return (
-    <Navbar as="nav" bg="dark" variant="dark">
+    <Navbar as="nav" bg="dark" variant="dark" fixed="top">
       <Container>
         <Navbar.Brand as={Link} to="/">
           NC News
