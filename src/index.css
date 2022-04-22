@@ -25,15 +25,6 @@ main {
 
 @media only screen and (min-width: 769px) {
 
-  /* .App {
-    display: grid;
-    grid-template-columns: min-content auto;
-    grid-template-rows: min-content auto;
-    grid-template-areas: 
-    'top top'
-    'sidebar main';
-  } */
-
   .home {
     display: grid;
     grid-template-columns: min-content auto;

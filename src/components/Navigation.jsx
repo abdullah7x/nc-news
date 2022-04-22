@@ -69,10 +69,6 @@ const Navigation = () => {
                             );
                           })}
                         </NavDropdown>
-
-                        <Nav.Link as={Link} to="/">
-                          Users
-                        </Nav.Link>
                       </Nav>
                     </Offcanvas.Body>
                   </Navbar.Offcanvas>
