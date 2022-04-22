@@ -126,6 +126,7 @@ p a:hover {
 
 .article-page-body {
   margin-bottom: 2em;
+  text-align: left;
 }
 
 footer {
@@ -147,6 +148,30 @@ div a {
 
 nav div a {
   color: white !important
+}
+
+.comments-section {
+  text-align: left;
+  /* border: #212529 1px solid; */
+  padding: 1em;
+}
+
+.comments-section h6 {
+  font-weight: normal;
+  font-size: smaller;
+}
+
+.comments-section h4 {
+  padding-bottom: .5em;
+}
+
+.comment-card {
+  margin: 1em;
+}
+
+.comment-card text {
+  font-style: italic;
+  font-size: .8em;
 }
 
 .dropdown-item {

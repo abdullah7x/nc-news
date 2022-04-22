@@ -24,6 +24,12 @@ export const fetchArticle = (article_id) => {
   });
 };
 
+export const fetchComments = (article_id) => {
+  return myApi.get(`/articles/${article_id}/comments`).then(({ data }) => {
+    return data;
+  });
+};
+
 export const addVote = (article_id, votes, setVotes, setDisabled) => {
   const currentVotes = votes;
   setVotes((currVotes) => currVotes + 1);

@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchArticle, addVote } from '../Utils/utils';
+import { fetchArticle, fetchComments, addVote } from '../Utils/utils';
 import { Link } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 
 const Article = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [articleTopic, setArticleTopic] = useState('');
+  const [comments, setComments] = useState([]);
   const [votes, setVotes] = useState(0);
   const [disabled, setDisabled] = useState(false);
 
@@ -17,6 +19,10 @@ const Article = () => {
         article.topic[0].toUpperCase() + article.topic.slice(1).toLowerCase()
       );
       setVotes(article.votes);
+    });
+
+    fetchComments(article_id).then((data) => {
+      setComments(data);
     });
   }, [article_id]);
 
@@ -39,6 +45,21 @@ const Article = () => {
       </button>
       <hr />
       <p className="article-page-body">{article.body}</p>
+      <hr />
+      <section className="comments-section">
+        <h4>{comments.length} Comments</h4>
+        {comments.map((comment) => {
+          return (
+            <Card body className="comment-card">
+              <h6>
+                {comment.author}, {comment.created_at}
+              </h6>
+              <p>{comment.body}</p>
+              <text>Likes: {comment.votes}</text>
+            </Card>
+          );
+        })}
+      </section>
     </div>
   );
 };
