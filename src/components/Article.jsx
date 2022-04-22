@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchArticle, fetchComments, addVote } from '../Utils/utils';
+import {
+  fetchArticle,
+  fetchComments,
+  addVote,
+  postComment,
+} from '../Utils/utils';
 import { Link } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
+import { Card, Form, Button } from 'react-bootstrap';
 
 const Article = () => {
   const { article_id } = useParams();
@@ -11,6 +16,28 @@ const Article = () => {
   const [comments, setComments] = useState([]);
   const [votes, setVotes] = useState(0);
   const [disabled, setDisabled] = useState(false);
+  const [newComment, setNewComment] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const prevComments = [...comments];
+
+    setComments((currComments) => {
+      return [
+        {
+          author: 'guest',
+          created_at: Date.now(),
+          body: newComment,
+          votes: 0,
+          comment_id: 'test-comment',
+        },
+        ...currComments,
+      ];
+    });
+
+    postComment(article_id, newComment, prevComments, setComments);
+  };
 
   useEffect(() => {
     fetchArticle(article_id).then(({ article }) => {
@@ -48,14 +75,39 @@ const Article = () => {
       <hr />
       <section className="comments-section">
         <h4>{comments.length} Comments</h4>
+
+        <Form onSubmit={handleSubmit}>
+          <Form.Control
+            size="lg"
+            type="text"
+            placeholder="Let's hear your opinion!"
+            value={newComment}
+            required
+            onChange={(e) => {
+              setNewComment(e.target.value);
+            }}
+          />
+          <div className="comment-bottom">
+            <Form.Check
+              inline="true"
+              type="checkbox"
+              label="I want to comment as a guest"
+              required
+            />
+            <Button className="form-button" variant="primary" type="submit">
+              Submit comment
+            </Button>
+          </div>
+        </Form>
+        <hr />
         {comments.map((comment) => {
           return (
-            <Card body className="comment-card">
+            <Card body className="comment-card" key={comment.comment_id}>
               <h6>
                 {comment.author}, {comment.created_at}
               </h6>
               <p>{comment.body}</p>
-              <text>Likes: {comment.votes}</text>
+              <p className="likes">Likes: {comment.votes}</p>
             </Card>
           );
         })}

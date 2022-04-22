@@ -169,7 +169,7 @@ nav div a {
   margin: 1em;
 }
 
-.comment-card text {
+.likes {
   font-style: italic;
   font-size: .8em;
 }
@@ -189,4 +189,13 @@ nav div a {
 button:disabled {
   background-color: var(--main-colour);
   color: white;
+}
+
+.comment-bottom button {
+  font-size: .9em;
+  padding: 5px;
+}
+
+.comment-bottom {
+  margin: 1em;
 }
