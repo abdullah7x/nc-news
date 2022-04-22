@@ -55,7 +55,7 @@ export const postComment = (
 ) => {
   myApi
     .post(`/articles/${article_id}/comments`, {
-      username: 'jessjelly',
+      username: 'guest',
       body: newComment,
     })
     .then(({ data }) => {

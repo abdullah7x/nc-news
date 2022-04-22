@@ -198,4 +198,6 @@ button:disabled {
 
 .comment-bottom {
   margin: 1em;
+  display: flex;
+  justify-content: space-between;
 }

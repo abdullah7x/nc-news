@@ -27,7 +27,7 @@ const Article = () => {
       return [
         {
           author: 'guest',
-          created_at: Date.now(),
+          created_at: new Date().toString(),
           body: newComment,
           votes: 0,
           comment_id: 'test-comment',
@@ -35,6 +35,8 @@ const Article = () => {
         ...currComments,
       ];
     });
+
+    setNewComment('');
 
     postComment(article_id, newComment, prevComments, setComments);
   };
@@ -104,7 +106,7 @@ const Article = () => {
           return (
             <Card body className="comment-card" key={comment.comment_id}>
               <h6>
-                {comment.author}, {comment.created_at}
+                {comment.author}, {new Date(comment.created_at).toString()}
               </h6>
               <p>{comment.body}</p>
               <p className="likes">Likes: {comment.votes}</p>
