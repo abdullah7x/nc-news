@@ -10,8 +10,14 @@ export const fetchTopics = () => {
   });
 };
 
-export const fetchArticles = (topic) => {
-  return myApi.get('/articles').then(({ data }) => {
+export const fetchArticles = (topic, sortBy) => {
+  let path = '/articles';
+  if (sortBy === 'comment_count') path += '?sort_by=comment_count';
+  if (sortBy === 'votes') path += '?sort_by=votes';
+  if (sortBy === 'asc') path += '?order=asc';
+  if (sortBy === 'desc') path += '?order=desc';
+
+  return myApi.get(path).then(({ data }) => {
     if (topic) {
       return data.filter((article) => article.topic === topic);
     } else return data;

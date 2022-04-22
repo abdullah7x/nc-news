@@ -20,25 +20,45 @@ code {
 
 main {
   max-width: 768px;
-  margin: 0 auto;
+  margin: 1em;
 }
 
-@media only screen and (max-width: 769px) {
+@media only screen and (min-width: 769px) {
+
+  /* .App {
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-template-rows: min-content auto;
+    grid-template-areas: 
+    'top top'
+    'sidebar main';
+  } */
+
+  .home {
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-template-areas: 
+    'left right right right right right';
+    column-gap: 5em;
+    padding: 10px;
+    align-items: stretch;
+    justify-content: end;;
+  }
+
   main {
-    margin: 1em;
+    margin: 0 auto;
+  }
+
+  .article-cards {
+    grid-area: right;
+  }
+
+  .filter-form {
+    grid-area: left;
+    margin-top: 5em;
+    width: max-content;
   }
 }
-
-/* header {
-  height: 4em;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
-  max-width: calc(100vw - 2em);
-  font-size: 1em;
-  padding: 1em;
-} */
 
 
 .article-cards {
@@ -152,7 +172,6 @@ nav div a {
 
 .comments-section {
   text-align: left;
-  /* border: #212529 1px solid; */
   padding: 1em;
 }
 
