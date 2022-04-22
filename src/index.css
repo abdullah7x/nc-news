@@ -19,9 +19,14 @@ code {
 } 
 
 main {
-  width: 100vw;
   max-width: 768px;
   margin: 0 auto;
+}
+
+@media only screen and (max-width: 769px) {
+  main {
+    margin: 1em;
+  }
 }
 
 /* header {
@@ -137,7 +142,7 @@ footer p {
 }
 
 div a {
-  color: var(--main-colour);
+  color: var(--main-colour) !important;
   text-decoration: solid;
 }
 
@@ -167,4 +172,21 @@ nav div a {
 .comment-card text {
   font-style: italic;
   font-size: .8em;
+}
+
+.dropdown-item {
+  color: var(--main-colour) !important;
+}
+
+.vote-button {
+  display: block;
+  margin-bottom: 1em;
+  border-radius: .2em;
+  color:#212529;
+  background-color: white;
+}
+
+button:disabled {
+  background-color: var(--main-colour);
+  color: white;
 }
