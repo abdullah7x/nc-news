@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchArticle } from '../Utils/utils';
+import { fetchArticle, addVote } from '../Utils/utils';
 import { Link } from 'react-router-dom';
 
 const Article = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [articleTopic, setArticleTopic] = useState('');
+  const [votes, setVotes] = useState(0);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     fetchArticle(article_id).then(({ article }) => {
@@ -14,8 +16,9 @@ const Article = () => {
       setArticleTopic(
         article.topic[0].toUpperCase() + article.topic.slice(1).toLowerCase()
       );
+      setVotes(article.votes);
     });
-  }, [article_id, article]);
+  }, [article_id]);
 
   return (
     <div className="article">
@@ -25,6 +28,15 @@ const Article = () => {
       </h6>
       <h6 className="article-page-author">{article.author}</h6>
       <h6 className="article-page-date">Created at: {article.created_at}</h6>
+      <button
+        disabled={disabled}
+        onClick={() => {
+          addVote(article_id, votes, setVotes, setDisabled);
+        }}
+        className="vote-button"
+      >
+        &hearts; Likes: {votes}
+      </button>
       <hr />
       <p className="article-page-body">{article.body}</p>
     </div>
