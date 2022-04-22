@@ -46,3 +46,24 @@ export const addVote = (article_id, votes, setVotes, setDisabled) => {
       }
     });
 };
+
+export const postComment = (
+  article_id,
+  newComment,
+  prevComments,
+  setComments
+) => {
+  myApi
+    .post(`/articles/${article_id}/comments`, {
+      username: 'guest',
+      body: newComment,
+    })
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => {
+      if (err) {
+        setComments(prevComments);
+      }
+    });
+};
