@@ -3,7 +3,7 @@ const Footer = () => {
     <div>
       <hr></hr>
       <footer className="bg-dark">
-        <p>Copyright 2022</p>
+        <p>Copyright &copy; 2022</p>
       </footer>
     </div>
   );
