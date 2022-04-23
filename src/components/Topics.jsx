@@ -16,7 +16,7 @@ const Topics = () => {
     });
   }, [topic, sortBy]);
   return (
-    <>
+    <section className="home">
       <Filter setSortBy={setSortBy}></Filter>
 
       <div className="article-cards">
@@ -51,7 +51,7 @@ const Topics = () => {
           );
         })}
       </div>
-    </>
+    </section>
   );
 };
 

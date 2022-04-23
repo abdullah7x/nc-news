@@ -56,65 +56,69 @@ const Article = () => {
   }, [article_id]);
 
   return (
-    <div className="article">
-      <h1 className="article-page-title">{article.title}</h1>
-      <h6 className="article-page-topic">
-        <Link to={`/articles/${article.topic}`}>{articleTopic}</Link>
-      </h6>
-      <h6 className="article-page-author">{article.author}</h6>
-      <h6 className="article-page-date">Created at: {article.created_at}</h6>
-      <button
-        disabled={disabled}
-        onClick={() => {
-          addVote(article_id, votes, setVotes, setDisabled);
-        }}
-        className="vote-button"
-      >
-        &hearts; Likes: {votes}
-      </button>
-      <hr />
-      <p className="article-page-body">{article.body}</p>
-      <hr />
-      <section className="comments-section">
-        <h4>{comments.length} Comments</h4>
-
-        <Form onSubmit={handleSubmit}>
-          <Form.Control
-            size="lg"
-            type="text"
-            placeholder="Let's hear your opinion!"
-            value={newComment}
-            required
-            onChange={(e) => {
-              setNewComment(e.target.value);
-            }}
-          />
-          <div className="comment-bottom">
-            <Form.Check
-              inline="true"
-              type="checkbox"
-              label="I want to comment as a guest"
-              required
-            />
-            <Button className="form-button" variant="primary" type="submit">
-              Submit comment
-            </Button>
-          </div>
-        </Form>
+    <section className="home">
+      <div className="article">
+        <h1 className="article-page-title">{article.title}</h1>
+        <h6 className="article-page-topic">
+          <Link to={`/articles/${article.topic}`}>{articleTopic}</Link>
+        </h6>
+        <h6 className="article-page-author">{article.author}</h6>
+        <h6 className="article-page-date">Created at: {article.created_at}</h6>
+        <button
+          disabled={disabled}
+          onClick={() => {
+            addVote(article_id, votes, setVotes, setDisabled);
+          }}
+          className="vote-button"
+        >
+          &hearts; Likes: {votes}
+        </button>
         <hr />
-        {comments.map((comment) => {
-          return (
-            <Card body className="comment-card" key={comment.comment_id}>
-              <h6>
-                {comment.author}, {new Date(comment.created_at).toString()}
-              </h6>
-              <p>{comment.body}</p>
-              <p className="likes">Likes: {comment.votes}</p>
-            </Card>
-          );
-        })}
-      </section>
-    </div>
+        <p className="article-page-body">{article.body}</p>
+        <hr />
+        <section className="comments-section">
+          <h4>{comments.length} Comments</h4>
+
+          <Form onSubmit={handleSubmit}>
+            <Form.Control
+              size="lg"
+              type="text"
+              placeholder="Let's hear your opinion!"
+              value={newComment}
+              required
+              onChange={(e) => {
+                setNewComment(e.target.value);
+              }}
+            />
+            <div className="comment-bottom">
+              <Form.Check
+                inline="true"
+                type="checkbox"
+                label="I want to comment as a guest"
+                required
+              />
+              <Button className="form-button" variant="primary" type="submit">
+                Submit comment
+              </Button>
+            </div>
+          </Form>
+          <hr />
+          <div className="comment-cards">
+            {comments.map((comment) => {
+              return (
+                <Card body className="comment-card" key={comment.comment_id}>
+                  <h6>
+                    {comment.author}, {new Date(comment.created_at).toString()}
+                  </h6>
+                  <p>{comment.body}</p>
+                  <p className="likes">Likes: {comment.votes}</p>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
+      </div>
+    </section>
   );
 };
 
