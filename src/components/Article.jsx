@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { Card, Form, Button } from 'react-bootstrap';
 
 const Article = () => {
+  const [error, setError] = useState(null);
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [articleTopic, setArticleTopic] = useState('');
@@ -43,18 +44,30 @@ const Article = () => {
   };
 
   useEffect(() => {
-    fetchArticle(article_id).then(({ article }) => {
-      setArticle(article);
-      setArticleTopic(
-        article.topic[0].toUpperCase() + article.topic.slice(1).toLowerCase()
-      );
-      setVotes(article.votes);
-    });
+    fetchArticle(article_id)
+      .then(({ article }) => {
+        setArticle(article);
+        setArticleTopic(
+          article.topic[0].toUpperCase() + article.topic.slice(1).toLowerCase()
+        );
+        setVotes(article.votes);
+      })
+      .catch((err) => {
+        setError('error');
+      });
 
-    fetchComments(article_id).then((data) => {
-      setComments(data);
-    });
+    fetchComments(article_id)
+      .then((data) => {
+        setComments(data);
+      })
+      .catch((err) => {
+        setError('error');
+      });
   }, [article_id]);
+
+  if (error) {
+    return <p className="not-found">Sorry, we couldn't find that article</p>;
+  }
 
   return (
     <section className="home">

@@ -6,15 +6,26 @@ import { Link } from 'react-router-dom';
 import Filter from './Filter';
 
 const Topics = () => {
+  const [error, setError] = useState(null);
   const { topic } = useParams();
   const [articles, setArticles] = useState([]);
   const [sortBy, setSortBy] = useState('asc');
 
   useEffect(() => {
-    fetchArticles(topic, sortBy).then((articlesFromApi) => {
-      setArticles(articlesFromApi);
-    });
+    fetchArticles(topic, sortBy)
+      .then((articlesFromApi) => {
+        setArticles(articlesFromApi);
+        if (!articlesFromApi.length) setError('error');
+      })
+      .catch((err) => {
+        setError('error');
+      });
   }, [topic, sortBy]);
+
+  if (error) {
+    return <p className="not-found">Sorry, that topic doesn't exist</p>;
+  }
+
   return (
     <section className="home">
       <Filter setSortBy={setSortBy}></Filter>
