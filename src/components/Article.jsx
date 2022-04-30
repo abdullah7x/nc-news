@@ -5,6 +5,7 @@ import {
   fetchComments,
   addVote,
   postComment,
+  deleteComment,
 } from '../Utils/utils';
 import { Link } from 'react-router-dom';
 import { Card, Form, Button } from 'react-bootstrap';
@@ -104,16 +105,41 @@ const Article = () => {
           </Form>
           <hr />
           <div className="comment-cards">
-            {comments.map((comment) => {
-              return (
-                <Card body className="comment-card" key={comment.comment_id}>
-                  <h6>
-                    {comment.author}, {new Date(comment.created_at).toString()}
-                  </h6>
-                  <p>{comment.body}</p>
-                  <p className="likes">Likes: {comment.votes}</p>
-                </Card>
-              );
+            {comments.map((comment, index) => {
+              if (comment.author === 'guest') {
+                return (
+                  <Card body className="comment-card" key={comment.comment_id}>
+                    <h6>
+                      {comment.author},{' '}
+                      {new Date(comment.created_at).toString()}
+                    </h6>
+                    <p>{comment.body}</p>
+                    <p className="likes">Likes: {comment.votes}</p>
+                    <button
+                      onClick={() =>
+                        deleteComment(
+                          index,
+                          comment.comment_id,
+                          comments,
+                          setComments
+                        )
+                      }
+                    >
+                      <i className="fa fa-trash-o"></i>
+                    </button>
+                  </Card>
+                );
+              } else
+                return (
+                  <Card body className="comment-card" key={comment.comment_id}>
+                    <h6>
+                      {comment.author},{' '}
+                      {new Date(comment.created_at).toString()}
+                    </h6>
+                    <p>{comment.body}</p>
+                    <p className="likes">Likes: {comment.votes}</p>
+                  </Card>
+                );
             })}
           </div>
         </section>

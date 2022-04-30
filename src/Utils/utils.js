@@ -73,3 +73,19 @@ export const postComment = (
       }
     });
 };
+
+export const deleteComment = (index, comment_id, comments, setComments) => {
+  const deletedComment = comments.filter(
+    (comment) => comment.comment_id === comment_id
+  );
+  setComments((currComments) => {
+    return currComments.filter((comment) => comment.comment_id !== comment_id);
+  });
+  myApi.delete(`/comments/${comment_id}`).catch((err) => {
+    setComments((currComments) => {
+      const newComments = [...currComments];
+      newComments.splice(index, 0, deletedComment[0]);
+      return newComments;
+    });
+  });
+};

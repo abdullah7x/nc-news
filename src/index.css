@@ -33,7 +33,7 @@ main {
 @media only screen and (min-width: 768px) {
 
   .home {
-    width: 80%;
+    width: 90%;
     margin: auto;
     overflow: hidden;
   }
@@ -44,7 +44,7 @@ main {
   }
 
   .article-cards {
-    width: 80%;
+    width: 70%;
     float: right;
     box-sizing: border-box;
     padding: 30px 0;
@@ -56,7 +56,7 @@ main {
   .filter-form {
     margin-top: 5em;
     float: left;
-    width: 10%;
+    width: 20%;
     box-sizing: border-box;
     padding: 27px 0px;
   }
