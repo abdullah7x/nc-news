@@ -22,7 +22,6 @@ const Article = () => {
   const [disabled, setDisabled] = useState(false);
   const [newComment, setNewComment] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  let newCommentId;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,7 +43,7 @@ const Article = () => {
 
     setNewComment('');
 
-    newCommentId = await postComment(
+    const newCommentId = await postComment(
       article_id,
       newComment,
       prevComments,
@@ -149,7 +148,7 @@ const Article = () => {
                       onClick={() =>
                         deleteComment(
                           index,
-                          newCommentId ? newCommentId : comment.comment_id,
+                          comment.comment_id,
                           comments,
                           setComments
                         )
