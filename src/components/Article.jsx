@@ -9,6 +9,7 @@ import {
 } from '../Utils/utils';
 import { Link } from 'react-router-dom';
 import { Card, Form, Button } from 'react-bootstrap';
+import { TailSpin } from 'react-loading-icons';
 
 const Article = () => {
   const [error, setError] = useState(null);
@@ -19,6 +20,7 @@ const Article = () => {
   const [votes, setVotes] = useState(0);
   const [disabled, setDisabled] = useState(false);
   const [newComment, setNewComment] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,6 +53,7 @@ const Article = () => {
           article.topic[0].toUpperCase() + article.topic.slice(1).toLowerCase()
         );
         setVotes(article.votes);
+        setIsLoading(false);
       })
       .catch((err) => {
         setError('error');
@@ -69,7 +72,7 @@ const Article = () => {
     return <p className="not-found">Sorry, we couldn't find that article</p>;
   }
 
-  return (
+  return !isLoading ? (
     <section className="home">
       <div className="article">
         <h1 className="article-page-title">{article.title}</h1>
@@ -123,7 +126,7 @@ const Article = () => {
                 return (
                   <Card body className="comment-card" key={comment.comment_id}>
                     <h6>
-                      {comment.author},{' '}
+                      Submitted by {comment.author},{' '}
                       {new Date(comment.created_at).toString()}
                     </h6>
                     <p>{comment.body}</p>
@@ -146,7 +149,7 @@ const Article = () => {
                 return (
                   <Card body className="comment-card" key={comment.comment_id}>
                     <h6>
-                      {comment.author},{' '}
+                      Submitted by {comment.author},{' '}
                       {new Date(comment.created_at).toString()}
                     </h6>
                     <p>{comment.body}</p>
@@ -156,6 +159,12 @@ const Article = () => {
             })}
           </div>
         </section>
+      </div>
+    </section>
+  ) : (
+    <section className="home">
+      <div className="loading">
+        <TailSpin stroke="#212529" height="5em" />
       </div>
     </section>
   );

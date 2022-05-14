@@ -53,6 +53,16 @@ main {
     margin-bottom: 1em;
   }
 
+  .loading {
+    width: 45%;
+    float: right;
+    box-sizing: border-box;
+    padding: 30px 0;
+    padding: none;
+    margin-top: 5em;
+    margin-bottom: 1em;
+  }
+
   .filter-form {
     margin-top: 5em;
     float: left;
@@ -64,11 +74,23 @@ main {
   .not-found {
     margin-top: 5em;
   }
+
+  .topic-loading {
+    width: 45%;
+    float: right;
+    box-sizing: border-box;
+    margin-top: -4%;
+  }
 }
 
 
 .article-card {
   max-width: 100%;
+}
+
+.loading {
+  max-width: 100%;
+  margin-left: 45%;
 }
 
 nav {
@@ -139,7 +161,7 @@ p a:hover {
 }
 
 .article-page-body {
-  margin-bottom: 2em;
+  padding: 1em 0;
   text-align: left;
 }
 
@@ -180,6 +202,11 @@ nav div a {
 
 .comment-card {
   margin: 1em;
+}
+
+.comment-card h6 {
+  line-height: 1.5em;
+  padding-bottom: 1em;
 }
 
 .likes {
@@ -224,4 +251,8 @@ button:disabled {
   text-align: center;
   font-style: italic;
   color: var(--main-colour);
+}
+
+.topic-loading {
+  margin-left: 45%
 }

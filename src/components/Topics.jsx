@@ -4,12 +4,14 @@ import { fetchArticles } from '../Utils/utils';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Filter from './Filter';
+import { TailSpin } from 'react-loading-icons';
 
 const Topics = () => {
   const [error, setError] = useState(null);
   const { topic } = useParams();
   const [articles, setArticles] = useState([]);
   const [sortBy, setSortBy] = useState('asc');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchArticles(topic, sortBy)
@@ -26,7 +28,7 @@ const Topics = () => {
     return <p className="not-found">Sorry, that topic doesn't exist</p>;
   }
 
-  return (
+  return !isLoading ? (
     <section className="home">
       <Filter setSortBy={setSortBy}></Filter>
 
@@ -61,6 +63,13 @@ const Topics = () => {
             </div>
           );
         })}
+      </div>
+    </section>
+  ) : (
+    <section className="home">
+      <Filter setSortBy={setSortBy}></Filter>
+      <div className="topic-loading">
+        <TailSpin stroke="#212529" height="5em" />
       </div>
     </section>
   );

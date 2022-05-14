@@ -3,17 +3,19 @@ import { Card } from 'react-bootstrap';
 import { fetchArticles } from '../Utils/utils';
 import { Link } from 'react-router-dom';
 import Filter from './Filter';
+import { TailSpin } from 'react-loading-icons';
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
   const [sortBy, setSortBy] = useState('asc');
+
   useEffect(() => {
     fetchArticles(null, sortBy).then((data) => {
       setArticles(data);
     });
   }, [sortBy]);
 
-  return (
+  return articles.length ? (
     <section className="home">
       <Filter setSortBy={setSortBy}></Filter>
       <div className="article-cards">
@@ -50,6 +52,13 @@ const Home = () => {
           );
         })}
       </div>{' '}
+    </section>
+  ) : (
+    <section className="home">
+      <Filter setSortBy={setSortBy}></Filter>
+      <div className="loading">
+        <TailSpin stroke="#212529" height="5em" />
+      </div>
     </section>
   );
 };
