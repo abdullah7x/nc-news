@@ -56,7 +56,7 @@ const Home = () => {
   ) : (
     <section className="home">
       <Filter setSortBy={setSortBy}></Filter>
-      <div className="loading">
+      <div className="topic-loading">
         <TailSpin stroke="#212529" height="5em" />
       </div>
     </section>

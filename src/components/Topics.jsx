@@ -18,6 +18,7 @@ const Topics = () => {
       .then((articlesFromApi) => {
         setArticles(articlesFromApi);
         if (!articlesFromApi.length) setError('error');
+        setIsLoading(false);
       })
       .catch((err) => {
         setError('error');

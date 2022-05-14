@@ -59,16 +59,17 @@ export const postComment = (
   prevComments,
   setComments
 ) => {
-  myApi
+  return myApi
     .post(`/articles/${article_id}/comments`, {
       username: 'guest',
       body: newComment,
     })
     .then(({ data }) => {
-      return data;
+      return data.comment.comment_id;
     })
     .catch((err) => {
       if (err) {
+        console.log(err);
         setComments(prevComments);
       }
     });

@@ -21,8 +21,9 @@ const Article = () => {
   const [disabled, setDisabled] = useState(false);
   const [newComment, setNewComment] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  let newCommentId;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const prevComments = [...comments];
@@ -34,7 +35,7 @@ const Article = () => {
           created_at: new Date().toString(),
           body: newComment,
           votes: 0,
-          comment_id: 'test-comment',
+          comment_id: 'newCommentId',
         },
         ...currComments,
       ];
@@ -42,7 +43,19 @@ const Article = () => {
 
     setNewComment('');
 
-    postComment(article_id, newComment, prevComments, setComments);
+    newCommentId = await postComment(
+      article_id,
+      newComment,
+      prevComments,
+      setComments
+    );
+
+    setComments((currComments) => {
+      let lastComment = currComments.shift();
+      let updatedComments = [...currComments];
+      lastComment.comment_id = newCommentId;
+      return [lastComment, ...updatedComments];
+    });
   };
 
   useEffect(() => {
@@ -135,7 +148,7 @@ const Article = () => {
                       onClick={() =>
                         deleteComment(
                           index,
-                          comment.comment_id,
+                          newCommentId ? newCommentId : comment.comment_id,
                           comments,
                           setComments
                         )
