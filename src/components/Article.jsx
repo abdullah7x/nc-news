@@ -10,6 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import { Card, Form, Button } from 'react-bootstrap';
 import { TailSpin } from 'react-loading-icons';
+import { MdOutlineDelete } from 'react-icons/md';
 
 const Article = () => {
   const [error, setError] = useState(null);
@@ -154,7 +155,7 @@ const Article = () => {
                         )
                       }
                     >
-                      <i className="fa fa-trash-o"></i>
+                      <MdOutlineDelete color="#212529" />
                     </button>
                   </Card>
                 );
