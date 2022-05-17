@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { Card, Form, Button } from 'react-bootstrap';
 import { TailSpin } from 'react-loading-icons';
 import { MdOutlineDelete } from 'react-icons/md';
+import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
 
 const Article = () => {
   const [error, setError] = useState(null);
@@ -19,7 +20,7 @@ const Article = () => {
   const [articleTopic, setArticleTopic] = useState('');
   const [comments, setComments] = useState([]);
   const [votes, setVotes] = useState(0);
-  const [disabled, setDisabled] = useState(false);
+  const [upvoted, setUpvoted] = useState(false);
   const [newComment, setNewComment] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
@@ -95,13 +96,12 @@ const Article = () => {
         <h6 className="article-page-author">{article.author}</h6>
         <h6 className="article-page-date">Created at: {article.created_at}</h6>
         <button
-          disabled={disabled}
           onClick={() => {
-            addVote(article_id, votes, setVotes, setDisabled);
+            addVote(article_id, votes, setVotes, upvoted, setUpvoted);
           }}
           className="vote-button"
         >
-          &hearts; Likes: {votes}
+          {upvoted ? <AiFillLike /> : <AiOutlineLike />} Likes: {votes}
         </button>
         <hr />
         <p className="article-page-body">{article.body}</p>

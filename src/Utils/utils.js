@@ -36,21 +36,42 @@ export const fetchComments = (article_id) => {
   });
 };
 
-export const addVote = (article_id, votes, setVotes, setDisabled) => {
+export const addVote = (article_id, votes, setVotes, upvoted, setUpvoted) => {
   const currentVotes = votes;
-  setVotes((currVotes) => currVotes + 1);
-
-  myApi
-    .patch(`/articles/${article_id}`, {
-      inc_votes: 1,
-    })
-    .then(setDisabled(true))
-    .catch((err) => {
-      if (err) {
-        setVotes(currentVotes);
-        setDisabled(false);
-      }
-    });
+  if (!upvoted) {
+    setVotes((currVotes) => currVotes + 1);
+    myApi
+      .patch(`/articles/${article_id}`, {
+        inc_votes: 1,
+      })
+      .then(({ data }) => {
+        setVotes(data.article.votes);
+        setUpvoted(true);
+      })
+      .catch((err) => {
+        if (err) {
+          setVotes(currentVotes);
+          setUpvoted(false);
+        }
+      });
+  }
+  if (upvoted) {
+    setVotes((currVotes) => currVotes - 1);
+    myApi
+      .patch(`/articles/${article_id}`, {
+        inc_votes: -1,
+      })
+      .then(({ data }) => {
+        setVotes(data.article.votes);
+        setUpvoted(false);
+      })
+      .catch((err) => {
+        if (err) {
+          setVotes(currentVotes);
+          setUpvoted(true);
+        }
+      });
+  }
 };
 
 export const postComment = (
