@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const myApi = axios.create({
-  baseURL: 'https://my-be-project.herokuapp.com/api',
+  baseURL: 'https://nc-news-api-zms6.onrender.com/api/',
 });
 
 export const fetchTopics = () => {

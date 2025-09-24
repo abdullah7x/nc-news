@@ -16,7 +16,7 @@ note: `V17` is the minimum version of node required to run this project locally.
 ## Link to API
 
 - https://github.com/abdullah7x/nc-news-api
-- https://my-be-project.herokuapp.com/api
+- https://nc-news-api-zms6.onrender.com/api/
 
 ## Link to deployed version
 
